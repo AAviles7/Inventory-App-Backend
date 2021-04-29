@@ -4,7 +4,7 @@ class User < ApplicationRecord
     has_many :received_orders, class_name: 'Order', foreign_key: 'receiver_id'
 
     has_secure_password
-    validates :username, uniqueness: { case_sensitive: false }
-    validates :username, presence: true, uniqueness: true
-    validates :password, presence: true
+    validates :username, presence: true
+    validates :password, presence: true, length: { is: 4 }
+    validates :security_level, numericality: { only_integer: true, less_than_or_equal_to: 3, greater_than: 0}
 end

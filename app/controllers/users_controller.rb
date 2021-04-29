@@ -9,7 +9,7 @@ class UsersController < ApplicationController
         user = User.create!({ 
             username: permitted_params['username'], 
             password: permitted_params['password'],
-            role: permitted_params['role'],
+            security_level: permitted_params['security_level'],
             restaurant_id: permitted_params['restaurant_id']
         })
         render json: user
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     end
 
     def permitted_params
-        params.require(:user).permit(:username, :password, :role, :restaurant_id)
+        params.require(:user).permit(:username, :password, :security_level, :restaurant_id)
     end
 
     def token_authenticate

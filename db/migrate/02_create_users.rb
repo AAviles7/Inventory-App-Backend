@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
     create_table :users do |t|
       t.string :username
       t.string :password_digest
-      t.string :role
+      t.integer :security_level
       t.belongs_to :restaurant, foreign_key: true
 
       t.timestamps
