@@ -278,3 +278,13 @@ food_item238 = FoodItem.create!(name: 'Frijoles', store: 'Central Kitchen')
 food_item239 = FoodItem.create!(name: 'Curtido Pupusa', store: 'Central Kitchen')
 food_item240 = FoodItem.create!(name: 'Mariscadas', store: 'Central Kitchen')
 food_item241 = FoodItem.create!(name: 'Polvo para Mariscadas', store: 'Central Kitchen')
+
+# Test Data Orders and Inventory
+## Arlington to Springfield
+order1 = Order.create!(receiver_id: null, creator_id: ar_tech.id, date: '05/07/2021', received: false, restaurant_id: springfield.id)
+
+OrderItems.create(order_id: order1.id, food_item_id: food_item234.id, quantity: 3)
+OrderItems.create(order_id: order1.id, food_item_id: food_item235.id, quantity: 5)
+OrderItems.create(order_id: order1.id, food_item_id: food_item236.id, quantity: 1)
+OrderItems.create(order_id: order1.id, food_item_id: food_item240.id, quantity: 75)
+
