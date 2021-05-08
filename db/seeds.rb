@@ -1,8 +1,3 @@
-# Deletes all previously seeded data
-User.destroy_all
-Restaurant.destroy_all
-FoodItem.destroy_all
-
 # All Restaurant locations [ Dona Bessy & Dona Cecy ]
 arlington = Restaurant.create!(location: 'Arlington', phone_number: '703-248-9400', manager: 'Rafael')
 springfield = Restaurant.create!(location: 'Springfield', phone_number: '703-333-5074', manager: 'Natelie')
@@ -15,6 +10,9 @@ ar_tech = User.create!(username: 'ar_tech', password: '9400', security_level: 3,
 sp_tech = User.create!(username: 'sp_tech', password: '5074', security_level: 3, restaurant_id: springfield.id)
 ro_tech = User.create!(username: 'ro_tech', password: '7993', security_level: 3, restaurant_id: rockville.id)
 lp_tech = User.create!(username: 'lp_tech', password: '1308', security_level: 3, restaurant_id: langley.id)
+
+ar_manager = User.create!(username: 'ar_manager', password: '9400', security_level: 2, restaurant_id: arlington.id)
+sp_manager = User.create!(username: 'sp_manager', password: '5074', security_level: 2, restaurant_id: springfield.id)
 
 # International
 food_item1 = FoodItem.create!(name: 'Yuca Congelada', store: 'International')
@@ -281,10 +279,36 @@ food_item241 = FoodItem.create!(name: 'Polvo para Mariscadas', store: 'Central K
 
 # Test Data Orders and Inventory
 ## Arlington to Springfield
-order1 = Order.create!(receiver_id: null, creator_id: ar_tech.id, date: '05/07/2021', received: false, restaurant_id: springfield.id)
+order1 = Order.create!(receiver_id: sp_manager.id, creator_id: ar_tech.id, date: '05/07/2021', received: false, restaurant_id: springfield.id, sent_restaurant_id: arlington.id)
 
-OrderItems.create(order_id: order1.id, food_item_id: food_item234.id, quantity: 3)
-OrderItems.create(order_id: order1.id, food_item_id: food_item235.id, quantity: 5)
-OrderItems.create(order_id: order1.id, food_item_id: food_item236.id, quantity: 1)
-OrderItems.create(order_id: order1.id, food_item_id: food_item240.id, quantity: 75)
+order_item1 = OrderItem.create(order_id: order1.id, food_item_id: food_item234.id, quantity: 3)
+order_item2 = OrderItem.create(order_id: order1.id, food_item_id: food_item235.id, quantity: 5)
+order_item3 = OrderItem.create(order_id: order1.id, food_item_id: food_item236.id, quantity: 1)
+order_item4 = OrderItem.create(order_id: order1.id, food_item_id: food_item240.id, quantity: 75)
 
+## Sam's Club to Arlington
+order2 = Order.create!(receiver_id: ar_manager.id, creator_id: ar_tech.id, date: '05/08/2021', received: false, restaurant_id: arlington.id, sent_restaurant_id: arlington.id)
+
+order_item5 = OrderItem.create(order_id: order2.id, food_item_id: food_item143.id, quantity: 3)
+order_item6 = OrderItem.create(order_id: order2.id, food_item_id: food_item144.id, quantity: 3)
+order_item7 = OrderItem.create(order_id: order2.id, food_item_id: food_item145.id, quantity: 3)
+order_item8 = OrderItem.create(order_id: order2.id, food_item_id: food_item146.id, quantity: 3)
+
+## RD to Arlington (Received)
+order3 = Order.create!(receiver_id: ar_tech.id, creator_id: ar_manager.id, date: '05/05/2021', received: true, restaurant_id: arlington.id, sent_restaurant_id: arlington.id)
+
+order_item9 = OrderItem.create(order_id: order3.id, food_item_id: food_item201.id, quantity: 3)
+order_item10 = OrderItem.create(order_id: order3.id, food_item_id: food_item202.id, quantity: 3)
+order_item11 = OrderItem.create(order_id: order3.id, food_item_id: food_item203.id, quantity: 3)
+order_item12 = OrderItem.create(order_id: order3.id, food_item_id: food_item204.id, quantity: 3)
+
+## Arlington Inventory
+inventory1 = InventoryItem.create!(food_item_id: food_item201.id, restaurant_id: arlington.id, quantity: 3)
+inventory2 = InventoryItem.create!(food_item_id: food_item202.id, restaurant_id: arlington.id, quantity: 3)
+inventory3 = InventoryItem.create!(food_item_id: food_item203.id, restaurant_id: arlington.id, quantity: 3)
+inventory4 = InventoryItem.create!(food_item_id: food_item204.id, restaurant_id: arlington.id, quantity: 3)
+
+inventory5 = InventoryItem.create!(food_item_id: food_item205.id, restaurant_id: arlington.id, quantity: 3)
+inventory6 = InventoryItem.create!(food_item_id: food_item206.id, restaurant_id: arlington.id, quantity: 3)
+inventory7 = InventoryItem.create!(food_item_id: food_item207.id, restaurant_id: arlington.id, quantity: 3)
+inventory8 = InventoryItem.create!(food_item_id: food_item208.id, restaurant_id: arlington.id, quantity: 3)

@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 6) do
   create_table "inventory_items", force: :cascade do |t|
     t.bigint "food_item_id", null: false
     t.bigint "restaurant_id"
+    t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["food_item_id"], name: "index_inventory_items_on_food_item_id"
@@ -47,11 +48,13 @@ ActiveRecord::Schema.define(version: 6) do
     t.string "date"
     t.boolean "received"
     t.bigint "restaurant_id"
+    t.integer "sent_restaurant_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["creator_id"], name: "index_orders_on_creator_id"
     t.index ["receiver_id"], name: "index_orders_on_receiver_id"
     t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
+    t.index ["sent_restaurant_id"], name: "index_orders_on_sent_restaurant_id"
   end
 
   create_table "restaurants", force: :cascade do |t|

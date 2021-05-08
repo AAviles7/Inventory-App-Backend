@@ -8,7 +8,8 @@ class InventoryItemsController < ApplicationController
     def create
         inventoryitem = InventoryItem.create!({ 
             food_item_id: permitted_params['food_item_id'], 
-            restaurant_id: permitted_params['restaurant_id']
+            restaurant_id: permitted_params['restaurant_id'],
+            quantity: permitted_params['quantity']
         })
         render json: inventoryitem
     end
@@ -30,7 +31,7 @@ class InventoryItemsController < ApplicationController
     end
 
     def permitted_params
-        params.require(:inventoryitem).permit(:food_item_id, :restaurant_id)
+        params.require(:inventoryitem).permit(:food_item_id, :restaurant_id, :quantity)
     end
 
 end

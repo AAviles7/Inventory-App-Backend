@@ -1,5 +1,5 @@
 class OrderSerializer < ActiveModel::Serializer
-  attributes :id, :receiver_id, :creator_id, :date, :received, :restaurant_id
+  attributes :id, :receiver_id, :creator_id, :date, :received, :restaurant_id, :sent_restaurant_id
 
   belongs_to :restaurant
   has_many :order_items
@@ -7,4 +7,5 @@ class OrderSerializer < ActiveModel::Serializer
 
   belongs_to :creator, class_name: 'User'
   belongs_to :receiver, class_name: 'User'
+  belongs_to :sent_restaurant, class_name: 'Restaurant'
 end

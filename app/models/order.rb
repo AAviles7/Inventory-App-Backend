@@ -5,5 +5,5 @@ class Order < ApplicationRecord
 
     belongs_to :creator, class_name: 'User'
     belongs_to :receiver, class_name: 'User'
-    validates :creator, uniqueness: {scope: :receiver}
+    belongs_to :sent_restaurant, class_name: 'Restaurant'
 end

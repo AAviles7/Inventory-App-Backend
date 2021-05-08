@@ -11,7 +11,8 @@ class OrdersController < ApplicationController
             creator_id: permitted_params['creator_id'],
             date: permitted_params['date'],
             received: permitted_params['received'],
-            restaurant_id: permitted_params['restaurant_id']
+            restaurant_id: permitted_params['restaurant_id'],
+            sent_restaurant_id: permitted_params['sent_restaurant_id']
         })
         render json: order
     end
@@ -33,7 +34,7 @@ class OrdersController < ApplicationController
     end
 
     def permitted_params
-        params.require(:order).permit(:receiver_id, :creator_id, :date, :received, :restaurant_id)
+        params.require(:order).permit(:receiver_id, :creator_id, :date, :received, :restaurant_id, :sent_restaurant_id)
     end
 
 end
